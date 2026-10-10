@@ -72,3 +72,9 @@ Check-in answers exist only in the current document's memory. There is no storag
 Original inline SVG illustrations; Bricolage Grotesque and DM Sans are self-hosted through Fontsource. `node scripts/social-image.mjs` regenerates the local Open Graph image. All primary reading content works without JavaScript; the form submit is disabled until its client handler is ready. The movement break includes static instructions.
 
 See [the build checklist](docs/BUILD_PLAN.md) for implementation status and [verification notes](docs/VERIFICATION.md) for what was tested.
+
+## License
+
+[MIT](LICENSE) · Copyright (c) 2026 Christopher Smothers.
+
+Third-party dependencies retain their respective licenses. The bundled fonts retain their SIL Open Font Licenses: [Bricolage Grotesque](public/licenses/bricolage-grotesque.txt) and [DM Sans](public/licenses/dm-sans.txt).
