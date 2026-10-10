@@ -1,0 +1,6 @@
+---
+import { sources, type SourceId } from '../data/sources';
+interface Props { id: SourceId }
+const source = sources.find(s => s.id === Astro.props.id)!;
+---
+<a class="citation" href={source.url} target="_blank" rel="noopener noreferrer">{source.label} ↗</a>

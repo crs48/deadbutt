@@ -1,0 +1,26 @@
+---
+interface Props { type: string; label?: string }
+const { type, label = 'Simplified movement illustration; follow the written instructions.' } = Astro.props;
+const poses: Record<string, { head: number[]; spine: string; arms: string; legs: string }> = {
+  squat: { head:[162,60], spine:'M158 83L135 133', arms:'M151 99L193 118L224 107', legs:'M135 133L190 158L177 216M135 133L110 159L105 216' },
+  hinge: { head:[216,94], spine:'M196 107L139 133', arms:'M186 110L189 168L194 189', legs:'M139 133L151 175L132 217M139 133L110 176L98 217' },
+  bridge: { head:[75,201], spine:'M100 195L158 156', arms:'M107 191L129 210L160 212', legs:'M158 156L213 160L240 211M158 156L200 178L210 212' },
+  step: { head:[161,47], spine:'M160 72L156 129', arms:'M158 83L126 116L101 99M158 83L195 105L212 84', legs:'M156 129L202 149L209 188M156 129L128 170L113 217' },
+  feet: { head:[158,51], spine:'M158 75L161 139', arms:'M158 90L122 122L95 116M158 90L196 109L220 87', legs:'M161 139L144 177L139 217M161 139L186 173L209 167' },
+  calf: { head:[160,49], spine:'M160 73L160 135', arms:'M160 88L196 116L226 104', legs:'M160 135L149 173L151 203L174 216M160 135L175 173L177 203L198 216' },
+};
+const p = poses[type] || poses.squat;
+---
+<svg viewBox="0 0 320 250" fill="none" role="img" aria-label={label}>
+  <circle cx="166" cy="123" r="99" fill="currentColor" opacity=".09"/>
+  <path d="M49 220H276" stroke="#283a30" stroke-width="2"/>
+  {type === 'squat' && <path d="M72 166h54v8H72zm4 8v44m44-44v44" stroke="#567653" stroke-width="5"/>}
+  {type === 'step' && <path d="M187 218v-27h56v27" fill="#bac9a4" stroke="#283a30" stroke-width="2"/>}
+  {type === 'hinge' && <g stroke="#283a30" stroke-width="5"><path d="M179 191h30m-27-9v18m23-18v18"/></g>}
+  {(type === 'feet' || type === 'calf') && <path d="M232 101v117M211 101h41" stroke="#567653" stroke-width="4"/>}
+  <path d={p.legs} stroke="#283a30" stroke-width="15" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d={p.arms} stroke="#b87354" stroke-width="10" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d={p.spine} stroke="#ef9d87" stroke-width="32" stroke-linecap="round"/>
+  <circle cx={p.head[0]} cy={p.head[1]} r="20" fill="#b87354" stroke="#283a30" stroke-width="2"/>
+  <path d={p.spine} stroke="#283a30" stroke-width="2" stroke-linecap="round"/>
+</svg>

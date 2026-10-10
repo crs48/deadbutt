@@ -1,0 +1,28 @@
+---
+interface Props { scene?: boolean; small?: boolean }
+const { scene = false, small = false } = Astro.props;
+---
+<svg class:list={['peach-art', { 'peach-small': small }]} viewBox={scene ? '0 0 600 520' : '130 90 350 350'} fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  {scene && <>
+    <path d="M70 425V244C70 128 147 42 288 42C429 42 525 136 525 253V425Z" fill="#e8e8d8"/>
+    <path d="M95 425H528" stroke="#283a30" stroke-width="2"/>
+    <path d="M459 112l8-24 9 24 24 8-24 9-9 24-8-24-24-9z" fill="#b4c995" stroke="#283a30" stroke-width="2"/>
+    <circle cx="119" cy="162" r="5" fill="#b55a3c"/>
+    <path d="M95 308c-32-49-28-79-7-78 24 1 33 42 7 78m0 2c-10-62 10-86 26-72 17 15-2 46-26 72m0 0v114" stroke="#567653" stroke-width="4" fill="#b4c995"/>
+    <path d="M81 392h30l-5 33H86z" fill="#cc7858" stroke="#283a30" stroke-width="2"/>
+    <g class="desk-chair" stroke="#283a30" stroke-width="4" stroke-linecap="round"><path d="M222 313v112m165-112v112"/><rect x="191" y="300" width="223" height="22" rx="10" fill="#b4c995"/><path d="M400 312V215q0-27 22-27h16v104q0 20-20 20" fill="#b4c995"/></g>
+    <path class="peach-legs" d="M257 328l-13 63-35 12q-15 10 1 14h51l25-82" stroke="#283a30" stroke-width="5" stroke-linecap="round" fill="#faf7ee"/>
+    <path d="M334 329l21 63 35 11q15 10-1 14h-51l-33-83" stroke="#283a30" stroke-width="5" stroke-linecap="round" fill="#faf7ee"/>
+  </>}
+  <g class="peach-body">
+    <path d="M297 143c-63-62-147-14-145 70 1 75 74 137 145 151 71-14 144-76 145-151 2-84-82-132-145-70Z" fill="#ef9d87" stroke="#283a30" stroke-width="4"/>
+    <path d="M297 143c29 43 35 86 18 128" stroke="#b95e4a" stroke-width="4" stroke-linecap="round"/>
+    <path d="M179 220c-2-26 6-46 23-55" stroke="#fbc6ae" stroke-width="13" stroke-linecap="round"/>
+    <path d="M298 142c-4-28 6-47 24-57" stroke="#283a30" stroke-width="6" stroke-linecap="round"/>
+    <path d="M303 117c-30 0-46-18-41-42 35 0 56 18 41 42Z" fill="#98b179" stroke="#283a30" stroke-width="3"/>
+    <g class="sleepy-face" stroke="#283a30" stroke-width="4" stroke-linecap="round"><path d="M215 247q12 12 25 0m107 0q12 12 25 0m-91 40q10-8 20 0"/></g>
+    <g class="awake-face" stroke="#283a30" stroke-width="4" stroke-linecap="round"><path d="M222 241v12m132-12v12m-70 24q12 20 26 0"/><path d="M167 269l-26-20m281 20 26-20"/></g>
+    <ellipse cx="208" cy="268" rx="14" ry="7" fill="#de7c6a"/><ellipse cx="379" cy="268" rx="14" ry="7" fill="#de7c6a"/>
+  </g>
+  {scene && <><g class="sleepy-face" fill="#283a30" font-family="monospace" font-size="28" transform="rotate(10 430 155)"><text x="427" y="165">z</text><text x="451" y="142" font-size="22">z</text></g><path d="M427 381q44-5 58-36m-3-1 6 2-2 10" stroke="#283a30" stroke-width="2" stroke-linecap="round"/><text x="384" y="457" fill="#53624f" font-family="monospace" font-size="13" transform="rotate(-6 384 457)">still very much alive.</text></>}
+</svg>
