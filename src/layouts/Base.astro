@@ -3,33 +3,112 @@ import '../styles/global.css';
 import '@fontsource-variable/bricolage-grotesque';
 import '@fontsource-variable/dm-sans';
 import { path } from '../lib/paths';
-interface Props { title?: string; description?: string }
-const { title = 'Your butt called. It wants its job back.', description = 'A friendly, evidence-aware field guide to gluteal amnesia, sitting, strength, and feeling at home in your body. Small moves. No shame. A few butt jokes.' } = Astro.props;
-const nav = [['The butt basics','learn/'],['The self check-in','check-in/'],['Get moving','moves/'],['The evidence','sources/']];
+interface Props {
+  title?: string;
+  description?: string;
+}
+const {
+  title = 'Your butt called. It wants its job back.',
+  description = 'A friendly, evidence-aware field guide to gluteal amnesia, sitting, strength, and feeling at home in your body. Small moves. No shame. A few butt jokes.',
+} = Astro.props;
+const nav = [
+  ['The butt basics', 'learn/'],
+  ['The self check-in', 'check-in/'],
+  ['Get moving', 'moves/'],
+  ['The evidence', 'sources/'],
+];
 const canonical = new URL(Astro.url.pathname, Astro.site);
 ---
+
 <!doctype html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title} · deadbutt.fyi</title><meta name="description" content={description} />
-    <link rel="canonical" href={canonical} /><link rel="icon" type="image/svg+xml" href={path('favicon.svg')} />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title} · deadbutt.fyi</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href={path('favicon.svg')} />
     <meta name="theme-color" content="#f8f5ed" />
-    <meta property="og:type" content="website" /><meta property="og:title" content={`${title} · deadbutt.fyi`} /><meta property="og:description" content={description} /><meta property="og:url" content={canonical} />
-    <meta property="og:image" content={new URL(path('social.png'), Astro.site)} /><meta name="twitter:card" content="summary_large_image" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={`${title} · deadbutt.fyi`} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={new URL(path('social.png'), Astro.site)} />
+    <meta name="twitter:card" content="summary_large_image" />
   </head>
   <body>
-    <a class="skip-link" href="#main">Skip to content</a>
+    <a class="skip-link" href="#main">
+      Skip to content
+    </a>
     <header class="site-header wrap">
-      <a class="wordmark" href={path()} aria-label="deadbutt.fyi home"><svg viewBox="0 0 42 36" fill="none" aria-hidden="true"><path d="M21 9C9-2 0 8 3 19c2 9 12 14 18 15 6-1 16-6 18-15C42 8 33-2 21 9Z" fill="#ef9d87" stroke="currentColor" stroke-width="2"/><path d="M21 9q6 7 3 15M21 8q0-7 7-7" stroke="currentColor" stroke-width="2"/></svg>deadbutt<span>.fyi</span></a>
-      <nav class="desktop-nav" aria-label="Main navigation">{nav.map(([label, route]) => <a href={path(route)} aria-current={Astro.url.pathname === path(route) ? 'page' : undefined}>{label}</a>)}</nav>
-      <a class="button button-small header-cta" href={path('reset/')}>Take a movement break <span aria-hidden="true">↗</span></a>
-      <details class="mobile-menu"><summary>Menu <span aria-hidden="true">+</span></summary><nav aria-label="Mobile navigation">{nav.map(([label, route])=><a href={path(route)}>{label}</a>)}<a href={path('reset/')}>Take a movement break ↗</a></nav></details>
+      <a class="wordmark" href={path()} aria-label="deadbutt.fyi home">
+        <svg viewBox="0 0 42 36" fill="none" aria-hidden="true">
+          <path
+            d="M21 9C9-2 0 8 3 19c2 9 12 14 18 15 6-1 16-6 18-15C42 8 33-2 21 9Z"
+            fill="#ef9d87"
+            stroke="currentColor"
+            stroke-width="2"
+          />
+          <path d="M21 9q6 7 3 15M21 8q0-7 7-7" stroke="currentColor" stroke-width="2" />
+        </svg>
+        deadbutt<span>.fyi</span>
+      </a>
+      <nav class="desktop-nav" aria-label="Main navigation">
+        {nav.map(([label, route]) => (
+          <a
+            href={path(route)}
+            aria-current={Astro.url.pathname === path(route) ? 'page' : undefined}
+          >
+            {label}
+          </a>
+        ))}
+      </nav>
+      <a class="button button-small header-cta" href={path('reset/')}>
+        Take a movement break <span aria-hidden="true">↗</span>
+      </a>
+      <details class="mobile-menu">
+        <summary>
+          Menu <span aria-hidden="true">+</span>
+        </summary>
+        <nav aria-label="Mobile navigation">
+          {nav.map(([label, route]) => (
+            <a href={path(route)}>{label}</a>
+          ))}
+          <a href={path('reset/')}>Take a movement break ↗</a>
+        </nav>
+      </details>
     </header>
-    <main id="main"><slot /></main>
+    <main id="main">
+      <slot />
+    </main>
     <footer class="site-footer wrap">
-      <div class="footer-top"><div><a class="wordmark" href={path()}>deadbutt<span>.fyi</span></a><p>A little less sitting. A little more living.<br/>A lot of affection for your posterior.</p></div><div class="footer-links"><a href={path('learn/')}>Get curious</a><a href={path('moves/')}>Get moving</a><a href={path('sources/')}>Sources & approach</a><a href="https://github.com/crs48/deadbutt">Source on GitHub ↗</a></div></div>
-      <div class="footer-bottom"><p>An exploration by <a href="https://crs.land">Chris Smothers ↗</a> · Made for real, wonderfully imperfect bodies.</p><p>Education, not a diagnosis. <a href={path('learn/#get-help')}>When to get help</a></p></div>
+      <div class="footer-top">
+        <div>
+          <a class="wordmark" href={path()}>
+            deadbutt<span>.fyi</span>
+          </a>
+          <p>
+            A little less sitting. A little more living.
+            <br />A lot of affection for your posterior.
+          </p>
+        </div>
+        <div class="footer-links">
+          <a href={path('learn/')}>Get curious</a>
+          <a href={path('moves/')}>Get moving</a>
+          <a href={path('sources/')}>Sources & approach</a>
+          <a href="https://github.com/crs48/deadbutt">Source on GitHub ↗</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>
+          An exploration by <a href="https://crs.land">Chris Smothers ↗</a> · Made for real,
+          wonderfully imperfect bodies.
+        </p>
+        <p>
+          Education, not a diagnosis. <a href={path('learn/#get-help')}>When to get help</a>
+        </p>
+      </div>
     </footer>
   </body>
 </html>

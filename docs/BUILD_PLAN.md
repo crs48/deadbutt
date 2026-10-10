@@ -3,7 +3,7 @@
 - [x] Review crs.land and Floor Life, Nervous System Healing, Food Forests, and AI Explained.
 - [x] Research terminology, activity guidance, pelvic tilt, footwear, and escalation signs.
 - [x] Set up Astro, Tailwind, self-hosted fonts, accessible layouts, and original SVG artwork.
-- [ ] Finish the illustrated guide, movement library, check-in, and three-minute break.
+- [x] Finish the illustrated guide, movement library, check-in, and three-minute break.
 - [ ] Verify safety routing, timer behavior, routes, responsive layouts, and production build.
 - [ ] Publish through GitHub Pages and document custom-domain setup.
 

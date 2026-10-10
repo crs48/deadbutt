@@ -1,0 +1,117 @@
+---
+import Base from '../layouts/Base.astro';
+import { sources } from '../data/sources';
+import { path } from '../lib/paths';
+---
+
+<Base
+  title="The evidence, with the footnotes"
+  description="Sources, uncertainty, and editorial principles behind deadbutt.fyi. No miracle cures, invented prevalence rates, or diagnostic quizzes."
+>
+  <header class="wrap page-heading">
+    <p class="eyebrow">The evidence / Last editorial review: October 10, 2026</p>
+    <h1>
+      Butt jokes.
+      <br />
+      <span class="serif-word">Actual footnotes.</span>
+    </h1>
+    <p>
+      You deserve useful information without a frightening story about your body. Here’s what
+      informed this guide, and where we’re keeping our claims modest.
+    </p>
+  </header>
+  <section class="wrap intro-grid" style="padding-bottom:45px">
+    <div class="prose">
+      <h2>How we call it.</h2>
+      <p>
+        <strong>Established guidance:</strong> regular physical activity and strength training
+        support health.
+      </p>
+      <p>
+        <strong>Promising, limited evidence:</strong> foot exercises and minimalist shoes may
+        improve some foot-strength outcomes.
+      </p>
+      <p>
+        <strong>Not established here:</strong> a “dead butt epidemic,” a diagnostic self-test, a
+        single posture that explains your pain, or a shoe that fixes your glutes.
+      </p>
+    </div>
+    <div class="callout" style="margin-top:0">
+      <p>
+        <strong>A friendly independent guide.</strong> This is an educational project by{' '}
+        <a href="https://crs.land">Chris Smothers</a>, not a clinical service. It has not been
+        individually reviewed by a medical professional. Exercise amounts are conservative examples
+        you can adjust, not prescriptions or claims from a clinical trial.
+      </p>
+      <p>
+        No ads, affiliate links, or product sales. No accounts. Check-in answers stay in this page’s
+        memory and disappear when you reload; we do not send or store them. GitHub Pages may process
+        ordinary hosting access logs.
+      </p>
+    </div>
+  </section>
+  <section class="wrap source-list" aria-label="Source library">
+    {sources.map((source, i) => (
+      <article class="source-item" id={source.id}>
+        <span>{String(i + 1).padStart(2, '0')}</span>
+        <div>
+          <p class="eyebrow">
+            {source.type} · {source.year}
+          </p>
+          <h2>
+            <a href={source.url} target="_blank" rel="noopener noreferrer">
+              {source.title} ↗
+            </a>
+          </h2>
+          <p>
+            <strong>{source.label}.</strong> {source.note}
+          </p>
+        </div>
+      </article>
+    ))}
+    <article class="source-item">
+      <span>10</span>
+      <div>
+        <p class="eyebrow">Orthopaedic patient guidance</p>
+        <h2>
+          <a
+            href="https://www.orthoinfo.org/recovery/hip-conditioning-program/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Hip conditioning program ↗
+          </a>
+        </h2>
+        <p>
+          <strong>American Academy of Orthopaedic Surgeons.</strong> Background on hip muscle groups
+          and gradual conditioning. Not an endorsement of this website or its exercise sequence.
+        </p>
+      </div>
+    </article>
+  </section>
+  <section class="wrap section intro-grid pt-0">
+    <div>
+      <p class="eyebrow">Part of a curious little corner of the internet</p>
+      <h2>
+        Keep <span class="serif-word">exploring.</span>
+      </h2>
+    </div>
+    <div class="prose">
+      <p>
+        The invitation-first approach here owes a nod to{' '}
+        <a href="https://crs48.github.io/floor-life/">Floor Life</a>,{' '}
+        <a href="https://crs48.github.io/nervous-system-healing/">Nervous System Healing</a>, and
+        the interactive explanations in{' '}
+        <a href="https://crs48.github.io/ai-explained/">AI Explained</a>.
+      </p>
+      <p>
+        Spotted a claim that needs a better source or an accessibility problem?{' '}
+        <a href="https://github.com/crs48/deadbutt/issues">Open an issue on GitHub</a>. Please keep
+        personal health information out of public issues.
+      </p>
+      <a class="text-link" href={path('learn/')}>
+        Back to the guide →
+      </a>
+    </div>
+  </section>
+</Base>

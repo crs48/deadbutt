@@ -1,0 +1,187 @@
+---
+import Base from '../layouts/Base.astro';
+import { path } from '../lib/paths';
+---
+
+<Base
+  title="Is my butt on a break? A gentle check-in"
+  description="A private, non-diagnostic check-in to help choose an appropriate next step. No score, no symptom tracking, no shame."
+>
+  <header class="wrap page-heading narrow">
+    <p class="eyebrow">The self check-in / About one minute</p>
+    <h1>
+      How’s it going,
+      <br />
+      <span class="serif-word">back there?</span>
+    </h1>
+    <p>
+      A little reflection to find your next step. This cannot diagnose gluteal amnesia, rule out an
+      injury, or measure your strength. No butt score. Promise.
+    </p>
+  </header>
+  <div class="wrap narrow" style="padding-bottom:60px">
+    <div class="callout warning">
+      <p>
+        <strong>Skip the check-in and get emergency care</strong> for new groin/saddle numbness, new
+        bladder or bowel control changes, or severe/worsening weakness in both legs, especially with
+        back pain. <a href={path('learn/#get-help')}>More about warning signs.</a>
+      </p>
+    </div>
+    <form id="check-in" class="activity-card" data-base={path()} novalidate>
+      <fieldset>
+        <legend>01 / First, is anything concerning happening?</legend>
+        <label class="radio-option">
+          <input type="radio" name="safety" value="clear" required />
+          <span>
+            No concerning symptoms—just curiosity, mild stiffness, or wanting to feel stronger.
+          </span>
+        </label>
+        <label class="radio-option">
+          <input type="radio" name="safety" value="concern" />
+          <span>
+            I have pain that persists or keeps coming back, numbness, tingling, or unexplained
+            weakness.
+          </span>
+        </label>
+        <label class="radio-option">
+          <input type="radio" name="safety" value="urgent" />
+          <span>I have one of the emergency warning signs described above.</span>
+        </label>
+      </fieldset>
+      <div id="routine-questions">
+        <fieldset>
+          <legend>02 / What brought you here?</legend>
+          <label class="radio-option">
+            <input type="radio" name="experience" value="stiff" required />
+            <span>I feel stiff after sitting and want more movement in my day.</span>
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="experience" value="strength" />
+            <span>I want to feel stronger or more coordinated through my legs and hips.</span>
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="experience" value="curious" />
+            <span>Honestly? The name. Now I’m curious.</span>
+          </label>
+        </fieldset>
+        <fieldset>
+          <legend>03 / What does a typical day look like?</legend>
+          <label class="radio-option">
+            <input type="radio" name="context" value="desk" required />
+            <span>Long stretches of sitting, with limited chances to move.</span>
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="context" value="active" />
+            <span>Fairly active, with exercise or plenty of time on my feet.</span>
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="context" value="mixed" />
+            <span>A mixture. It depends on the day and my capacity.</span>
+          </label>
+        </fieldset>
+      </div>
+      <p class="form-error" id="check-error" role="alert" hidden>
+        Please answer each question so we can offer a relevant next step.
+      </p>
+      <button class="button" type="submit" id="check-submit" disabled>
+        Find my next step <span aria-hidden="true">↗</span>
+      </button>
+      <p class="note" style="margin:18px 0 0">
+        Your answers stay on this page. Nothing is sent or saved.
+      </p>
+      <section
+        class="check-result"
+        id="check-result"
+        aria-labelledby="result-title"
+        tabindex="-1"
+        hidden
+      >
+        <p class="eyebrow">A next step, not a diagnosis</p>
+        <h2 id="result-title"></h2>
+        <p id="result-body"></p>
+        <p id="result-next"></p>
+        <div class="result-actions">
+          <a class="button" id="result-link"></a>
+          <button class="button button-outline" id="check-reset" type="button">
+            Start over
+          </button>
+        </div>
+      </section>
+      <noscript>
+        <div class="callout">
+          <p>
+            The interactive check-in needs JavaScript. If you have concerning symptoms,{' '}
+            <a href={path('learn/#get-help')}>read when to get help</a>. Otherwise, start with{' '}
+            <a href={path('learn/')}>the guide</a> or explore a{' '}
+            <a href={path('moves/')}>comfortable movement</a>.
+          </p>
+        </div>
+      </noscript>
+    </form>
+  </div>
+</Base>
+<script>
+  import { getCheckInResult, type Safety, type Experience, type Context } from '../lib/check-in';
+  const form = document.querySelector<HTMLFormElement>('#check-in')!;
+  const result = document.querySelector<HTMLElement>('#check-result')!;
+  const error = document.querySelector<HTMLElement>('#check-error')!;
+  const routine = document.querySelector<HTMLElement>('#routine-questions')!;
+  const submit = document.querySelector<HTMLButtonElement>('#check-submit')!;
+  const showResult = (
+    safety: Safety,
+    experience: Experience = 'curious',
+    context: Context = 'mixed',
+  ) => {
+    const recommendation = getCheckInResult({ safety, experience, context });
+    document.querySelector('#result-title')!.textContent = recommendation.title;
+    document.querySelector('#result-body')!.textContent = recommendation.body;
+    document.querySelector('#result-next')!.textContent = recommendation.next;
+    const link = document.querySelector<HTMLAnchorElement>('#result-link')!;
+    link.href = `${form.dataset.base}${recommendation.route}`;
+    link.textContent = `${recommendation.label} →`;
+    result.dataset.kind = recommendation.kind;
+    result.hidden = false;
+    error.hidden = true;
+    result.focus();
+  };
+  form.addEventListener('change', () => {
+    const data = new FormData(form);
+    const safety = data.get('safety') as Safety | null;
+    const needsCare = safety === 'urgent' || safety === 'concern';
+    routine.hidden = needsCare;
+    routine
+      .querySelectorAll<HTMLInputElement>('input')
+      .forEach((input) => (input.disabled = needsCare));
+    submit.hidden = needsCare;
+    result.hidden = true;
+    error.hidden = true;
+    if (needsCare) showResult(safety);
+  });
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    const data = new FormData(form);
+    if (!['safety', 'experience', 'context'].every((key) => data.get(key))) {
+      error.hidden = false;
+      const missing = ['safety', 'experience', 'context'].find((key) => !data.get(key));
+      form.querySelector<HTMLInputElement>(`input[name="${missing}"]`)?.focus();
+      return;
+    }
+    showResult(
+      data.get('safety') as Safety,
+      data.get('experience') as Experience,
+      data.get('context') as Context,
+    );
+  });
+  submit.disabled = false;
+  document.querySelector('#check-reset')?.addEventListener('click', () => {
+    form.reset();
+    result.hidden = true;
+    error.hidden = true;
+    routine.hidden = false;
+    submit.hidden = false;
+    routine
+      .querySelectorAll<HTMLInputElement>('input')
+      .forEach((input) => (input.disabled = false));
+    form.querySelector<HTMLInputElement>('input')?.focus();
+  });
+</script>

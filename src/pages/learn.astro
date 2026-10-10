@@ -1,0 +1,350 @@
+---
+import Base from '../layouts/Base.astro';
+import Cite from '../components/Cite.astro';
+import { path } from '../lib/paths';
+const sections = [
+  ['what-is-it', 'The name & the nuance'],
+  ['sitting', 'A culture of sitting'],
+  ['anatomy', 'Meet the glute group'],
+  ['feel', 'What it can feel like'],
+  ['pelvis', 'Pelvic tilt, without panic'],
+  ['hamstrings', 'The hamstring question'],
+  ['feet', 'Feet & barefoot shoes'],
+  ['get-help', 'When to get help'],
+];
+---
+
+<Base
+  title="The butt basics"
+  description="Understand gluteal amnesia, sitting, pelvic tilt, hamstrings, feet, and what the evidence can actually tell us."
+>
+  <header class="wrap page-heading">
+    <p class="eyebrow">The butt basics / An 8-minute field trip</p>
+    <h1>
+      Get to know
+      <br />
+      your <span class="serif-word">behind.</span>
+    </h1>
+    <p>
+      One nickname. Quite a few different stories. Let’s untangle them without turning your body
+      into a list of things to fix.
+    </p>
+  </header>
+  <div class="wrap reading-layout">
+    <aside class="toc">
+      <p class="eyebrow">In this guide</p>
+      <nav aria-label="On this page">
+        {sections.map(([id, label]) => (
+          <a href={`#${id}`}>{label}</a>
+        ))}
+      </nav>
+    </aside>
+    <div class="prose">
+      <section id="what-is-it">
+        <p class="eyebrow">01 / A name with a little baggage</p>
+        <h2>First: your butt is alive.</h2>
+        <p>
+          “Dead butt syndrome,” “sleepy glutes,” and “gluteal amnesia” are informal labels you’ll
+          see in fitness and health writing. Usually, someone is describing glutes that feel weak,
+          hard to sense, or poorly coordinated during a particular movement. The terms are used
+          inconsistently;{' '}
+          <strong>there is no single home test that turns the nickname into a diagnosis.</strong>
+        </p>
+        <p>
+          Muscles do not literally lose their memory. Strength, skill, fatigue, pain, and the task
+          you’re doing all influence how movement feels. Being able to squeeze your buttocks—or not
+          feeling them burn during a squat—cannot tell the whole story.
+        </p>
+        <Cite id="terminology" />
+        <h3>And gluteal tendinopathy?</h3>
+        <p>
+          That is a more specific problem involving the tendons near the outside of the hip, often
+          discussed within greater trochanteric pain syndrome (GTPS). Pain when lying on your side,
+          climbing stairs, or loading one leg can be clues. It needs an assessment and an
+          appropriate loading plan. It is not a synonym for every weak or “sleepy” butt.
+        </p>
+        <Cite id="tendon" />
+        <div class="callout">
+          <p>
+            <strong>The useful question:</strong> “What am I noticing, and what would help me do the
+            things I care about?” That gets us further than deciding whether your rear is officially
+            deceased.
+          </p>
+        </div>
+      </section>
+      <section id="sitting">
+        <p class="eyebrow">02 / An extremely seated civilization</p>
+        <h2>Busy day. Same position.</h2>
+        <p>
+          Car seat to office chair to couch: many environments make sitting the easiest option. Work
+          demands, disability, pain, caregiving, and access to safe spaces all affect how much
+          choice people have. This is bigger than willpower.
+        </p>
+        <p>
+          The WHO describes increasingly sedentary lives shaped by motorized transport and screens.
+          It also reports that insufficient physical activity increased between 2010 and 2022.{' '}
+          <strong>
+            That is evidence of an activity problem, not a measured rise in “gluteal amnesia.”
+          </strong>{' '}
+          We do not have a reliable population count for that loosely defined label.
+        </p>
+        <Cite id="who" />
+        <p>
+          Sitting gives many muscles less strength work than standing up, climbing, or lifting.
+          Long, unvaried stretches can leave you feeling stiff. But sitting is also normal, useful,
+          and sometimes necessary. A chair does not switch your glutes off forever; a standing desk
+          is not strength training either.
+        </p>
+        <h3>Build invitations, not guilt.</h3>
+        <ul>
+          <li>
+            Pair a position change or short walk with an existing cue: the end of a call, filling
+            your water, or finishing a chapter.
+          </li>
+          <li>
+            Make your preferred movement easy to reach: clear a little floor space, keep a sturdy
+            chair available, or choose a familiar walking route.
+          </li>
+          <li>
+            Try a movement break roughly every 30–60 minutes if practical. That is a habit prompt,
+            not a proven “dead butt” prevention dose. Adjust it to your body and work.
+          </li>
+          <li>
+            If standing or walking is not available to you, vary supported positions or try
+            comfortable seated movement. An occupational therapist or physical therapist can help
+            adapt your setup.
+          </li>
+        </ul>
+        <p>
+          For general adult health, WHO guidance includes 150–300 minutes of moderate aerobic
+          activity per week and strength work for major muscle groups on at least two days. Starting
+          with less is worthwhile. Build toward what is appropriate for you.
+        </p>
+        <Cite id="guidelines" />
+      </section>
+      <section id="anatomy">
+        <p class="eyebrow">03 / More than seat cushions</p>
+        <h2>Meet the glute group.</h2>
+        <p>
+          Three main gluteal muscles live on each side. They collaborate with your hamstrings,
+          adductors, quadriceps, trunk, and lower legs. Movement is a group project.
+        </p>
+        <div class="anatomy-grid">
+          <article>
+            <h3>Maximus</h3>
+            <p>
+              The big hip extender. Helps drive you up from a chair and power stairs, running, and
+              lifting.
+            </p>
+          </article>
+          <article>
+            <h3>Medius</h3>
+            <p>
+              Works around the side of your hip. Helps manage the pelvis and thigh as you support
+              yourself on one leg.
+            </p>
+          </article>
+          <article>
+            <h3>Minimus</h3>
+            <p>
+              The deeper teammate beneath medius. Helps control hip movement and support single-leg
+              tasks.
+            </p>
+          </article>
+        </div>
+        <p>
+          Think of <strong>strength</strong> as how much force you can produce,{' '}
+          <strong>coordination</strong> as how you organize it, and <strong>awareness</strong> as
+          what you notice. Those are related but different. A stronger bridge does not require a
+          dramatic sensation, and a dramatic sensation does not prove greater strength.
+        </p>
+        <p>
+          You can practice both simple patterns and increasingly challenging work. “Activation”
+          drills may help you learn a movement. They are not an electrical restart button, and they
+          are not mandatory before every walk.
+        </p>
+        <a
+          class="citation"
+          href="https://www.orthoinfo.org/recovery/hip-conditioning-program/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          AAOS hip conditioning guidance ↗
+        </a>
+      </section>
+      <section id="feel">
+        <p class="eyebrow">04 / Sensations are clues, not verdicts</p>
+        <h2>“Something feels… off.”</h2>
+        <p>
+          People use the dead-butt label for different experiences: stiffness after sitting, tiring
+          easily on stairs, trouble finding a comfortable squat, or feeling the backs of the thighs
+          more than the buttocks. None of these, alone, identifies the cause.
+        </p>
+        <ul>
+          <li>
+            <strong>“I feel all quads.”</strong> Squats naturally use your quadriceps. Your
+            proportions, depth, load, and technique change the mix. That sensation alone does not
+            show glute failure.
+          </li>
+          <li>
+            <strong>“I’m wobbly on one leg.”</strong> Balance involves vision, the inner ear,
+            sensation, attention, strength, and practice. Use support; a wobble is not a glute
+            diagnosis.
+          </li>
+          <li>
+            <strong>“My outer hip hurts.”</strong> Especially with side-lying or stairs, this can
+            warrant a tendon assessment. Repeatedly stretching the sore area may aggravate it.
+          </li>
+          <li>
+            <strong>“I’m numb or tingling.”</strong> A sensory symptom deserves a different
+            conversation from ordinary muscular effort. Do not assume it means your glutes just need
+            activating.
+          </li>
+        </ul>
+        <p>
+          Rather than grading your body, note where the feeling is, what brings it on, what eases
+          it, and whether it changes over time. Bring that information to a clinician if symptoms
+          persist.
+        </p>
+        <a class="text-link" href={path('check-in/')}>
+          Try the gentle check-in →
+        </a>
+      </section>
+      <section id="pelvis">
+        <p class="eyebrow">05 / Your pelvis is allowed to move</p>
+        <h2>Pelvic tilt, without panic.</h2>
+        <p>
+          Anterior pelvic tilt means the pelvis tips forward. That changes the relationship between
+          your trunk and thighs. Glutes and abdominal muscles can help control pelvic position in
+          some tasks; hip flexors and back muscles also play a part. But a resting posture cannot
+          reliably tell you which muscles are weak or tight.
+        </p>
+        <p>
+          The popular story—sitting tightens hip flexors, turns off glutes, tips the pelvis, and
+          causes pain—is too neat. People have different anatomy and many comfortable postures. Pain
+          has multiple influences. You cannot diagnose the whole chain from a side-view photo.
+        </p>
+        <p>
+          A systematic review of interventions for excessive anterior tilt found very low-quality
+          evidence and no established overall treatment effect. That limits promises to “fix your
+          tilt.” It does not mean you must avoid strength training or never explore a different
+          position.
+        </p>
+        <Cite id="pelvis" />
+        <div class="callout">
+          <p>
+            <strong>Try an experiment, not a correction:</strong> in a comfortable supported
+            position, gently explore tipping your pelvis a little forward and back. Choose an easy
+            middle range and keep breathing. Stop if painful. The point is more options, not holding
+            one supposedly perfect angle all day.
+          </p>
+        </div>
+        <p>
+          If your back hurts repeatedly during lifting, adjust the load and range and seek
+          individualized help. More comfortable movement is a better target than a perfectly flat
+          back or a permanently tucked tail.
+        </p>
+      </section>
+      <section id="hamstrings">
+        <p class="eyebrow">06 / Tight does not always mean short</p>
+        <h2>
+          Your hamstrings aren’t
+          <br />
+          the bad guys.
+        </h2>
+        <p>
+          Most hamstrings cross both your hip and knee: they help extend the hip and bend the knee.
+          They are meant to work alongside the glutes during a hinge. Pelvic and knee position both
+          change their length.
+        </p>
+        <p>
+          A feeling of tightness can accompany fatigue, unfamiliar loading, or sensitivity. It does
+          not prove a muscle is permanently shortened—or that another muscle has stopped working.
+          Stronger and more flexible are also different qualities: a muscle can feel tight while
+          still needing appropriately dosed strength work.
+        </p>
+        <h3>What to try</h3>
+        <p>
+          Explore a small, unweighted hip hinge. Bend your knees a little, send your hips back, and
+          stop before the movement feels forced. You do not have to touch your toes. If comfortable,
+          gradually practice more repetitions or resistance over time.
+        </p>
+        <p>
+          Gentle stretching is an option if it feels helpful. Aggressive stretching is not the
+          default answer, especially if the sensation is burning, electric, or travels below the
+          knee. Those symptoms are a reason to seek assessment rather than chase more range.
+        </p>
+        <a class="text-link" href={path('moves/hip-hinge/')}>
+          Learn the hinge & Romanian deadlift →
+        </a>
+      </section>
+      <section id="feet">
+        <p class="eyebrow">07 / The footnotes matter</p>
+        <h2>Reconnect from the ground up.</h2>
+        <p>
+          Your feet provide contact and sensory information while their muscles and your calves help
+          manage load. Practicing balance, walking, and calf raises can give them useful work. That
+          does not mean weak feet cause every hip issue, or that the entire body can be fixed from
+          the shoes upward.
+        </p>
+        <h3>What about barefoot shoes?</h3>
+        <p>
+          Some trials suggest foot exercises and minimalist footwear can increase aspects of foot
+          strength. A 2025 systematic review rated the evidence low to very low certainty. The
+          effects on muscle size and movement varied. These studies do not establish a cure for
+          gluteal amnesia, pelvic tilt, or back pain.
+        </p>
+        <Cite id="feet" />
+        <p>
+          There is no need to buy anything to begin. Comfortable, well-fitting shoes are a valid
+          choice. Bare feet on a safe surface are optional. If you try less cushioning or a lower
+          heel, start with brief, easy exposure and increase gradually only if comfortable. Avoid
+          adding running distance at the same time; feet, calves, and Achilles tendons need time to
+          adapt.
+        </p>
+        <Cite id="footwear" />
+        <div class="callout">
+          <p>
+            With reduced foot sensation, diabetes-related foot problems, wounds, or a history of
+            foot injury, seek individualized footwear advice. “Natural” is not a substitute for
+            protection.
+          </p>
+        </div>
+        <a class="text-link" href={path('moves/foot-tripod/')}>
+          Meet your feet, shoes optional →
+        </a>
+      </section>
+      <section id="get-help">
+        <p class="eyebrow">08 / Sometimes the next move is getting support</p>
+        <h2>
+          Take the symptoms seriously.
+          <br />
+          Keep the nickname light.
+        </h2>
+        <div class="callout warning">
+          <p>
+            <strong>Get emergency care now</strong> for new numbness around the groin, genitals, or
+            anus; new bladder or bowel control changes; or severe/worsening weakness in both legs,
+            especially with back pain. Do not try to exercise these away. Call your local emergency
+            number or go to an emergency department.
+          </p>
+        </div>
+        <p>
+          <strong>Seek prompt medical advice</strong> for new or increasing weakness, persistent or
+          spreading numbness, severe sudden pain, fever with back pain, or symptoms after an injury.
+          For pain that keeps returning, disrupts sleep or daily life, or is not improving, arrange
+          an assessment with a clinician or physical therapist.
+        </p>
+        <Cite id="care" />
+        <p>
+          Our exercise ideas are for general movement education. A clinician can assess strength,
+          sensation, tendons, joints, and nerves and help choose a plan that fits your history. You
+          do not have to solve persistent pain alone.
+        </p>
+        <a class="button" href={path('moves/')}>
+          Explore the movement library →
+        </a>
+      </section>
+    </div>
+  </div>
+</Base>

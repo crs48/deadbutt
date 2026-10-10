@@ -1,0 +1,174 @@
+---
+import Base from '../layouts/Base.astro';
+import { path } from '../lib/paths';
+import { breakSteps } from '../lib/timer';
+---
+
+<Base
+  title="A three-minute movement break"
+  description="Take a gentle three-minute break with an accessible, optional timer. Seated alternatives, your own pace, and no pressure to finish."
+>
+  <header class="wrap page-heading narrow">
+    <p class="eyebrow">The three-minute intermission</p>
+    <h1>
+      A little break
+      <br />
+      for your <span class="serif-word">behind.</span>
+    </h1>
+    <p>
+      No gear, no dramatic transformation. Just three invitations to change things up. You can
+      pause, skip, or do the whole thing seated.
+    </p>
+  </header>
+  <div class="wrap narrow" style="padding-bottom:70px">
+    <div class="callout">
+      <p>
+        Clear a little space and use a stable chair or counter. Move only if comfortable; stop for
+        pain, dizziness, tingling, or numbness. This is a movement break, not a rehabilitation
+        protocol. <a href={path('learn/#get-help')}>Symptoms that need care →</a>
+      </p>
+    </div>
+    <div class="activity-card timer-card" id="break-timer">
+      <div class="timer-clock">
+        <p>Time for this invitation</p>
+        <div
+          class="timer-display"
+          id="timer-display"
+          role="timer"
+          aria-label="Time remaining in current step"
+        >
+          1:00
+        </div>
+        <p id="timer-state">Ready when you are</p>
+      </div>
+      <div class="timer-instruction" aria-live="polite" aria-atomic="true">
+        <p class="eyebrow" id="timer-step">
+          01 / 03 · Begin gently
+        </p>
+        <h2 id="timer-title">{breakSteps[0].title}</h2>
+        <p id="timer-instruction">{breakSteps[0].instruction}</p>
+      </div>
+      <progress
+        class="timer-progress"
+        id="timer-progress"
+        max="180"
+        value="0"
+        aria-label="Movement break progress"
+      ></progress>
+      <div class="timer-controls">
+        <button type="button" class="button" id="timer-toggle">
+          Start my break →
+        </button>
+        <button type="button" class="button button-outline" id="timer-next">
+          Skip this step
+        </button>
+        <button type="button" class="button button-outline" id="timer-reset">
+          Reset
+        </button>
+      </div>
+      <noscript>
+        <p>
+          Use the three invitations below at your own pace. The optional timer needs JavaScript.
+        </p>
+      </noscript>
+    </div>
+    <p class="microcopy" style="text-align:center">
+      No sounds, streaks, or notifications. Timer pauses when you leave this tab.
+    </p>
+    <div class="reset-steps">
+      {breakSteps.map((step, i) => (
+        <article>
+          <p class="eyebrow">0{i + 1} / About a minute</p>
+          <h3>{step.title}</h3>
+          <p>{step.instruction}</p>
+        </article>
+      ))}
+    </div>
+    <div class="prose">
+      <h2>That counts.</h2>
+      <p>
+        A brief break is an opportunity for movement variety. It does not replace regular strength
+        work or a clinical plan. If it felt good, attach it to a moment you already have in your
+        day.
+      </p>
+      <a class="text-link" href={path('moves/')}>
+        Want a little more? Explore the movement guides →
+      </a>
+    </div>
+  </div>
+</Base>
+<script>
+  import {
+    breakSteps,
+    totalSeconds,
+    initialTimer,
+    timerReducer,
+    stepIndex,
+    formatTime,
+    type TimerAction,
+  } from '../lib/timer';
+  let state = { ...initialTimer };
+  let shownStep = -1;
+  const toggle = document.querySelector<HTMLButtonElement>('#timer-toggle')!;
+  const next = document.querySelector<HTMLButtonElement>('#timer-next')!;
+  const display = document.querySelector('#timer-display')!;
+  const status = document.querySelector('#timer-state')!;
+  const progress = document.querySelector<HTMLProgressElement>('#timer-progress')!;
+  const render = () => {
+    const complete = state.elapsed >= totalSeconds;
+    const index = complete ? breakSteps.length : stepIndex(state.elapsed);
+    display.textContent = complete ? '0:00' : formatTime((index + 1) * 60 - state.elapsed);
+    status.textContent = complete
+      ? 'A little more connected.'
+      : state.running
+        ? 'Go at your own pace'
+        : state.elapsed > 0
+          ? 'Paused. Take your time.'
+          : 'Ready when you are';
+    progress.value = state.elapsed;
+    toggle.textContent = complete
+      ? 'Take another break ↻'
+      : state.running
+        ? 'Pause'
+        : state.elapsed > 0
+          ? 'Continue →'
+          : 'Start my break →';
+    next.disabled = complete;
+    if (index !== shownStep) {
+      shownStep = index;
+      document.querySelector('#timer-step')!.textContent = complete
+        ? '03 / 03 · All done'
+        : `0${index + 1} / 03 · Begin gently`;
+      document.querySelector('#timer-title')!.textContent = complete
+        ? 'Welcome back to your body.'
+        : breakSteps[index].title;
+      document.querySelector('#timer-instruction')!.textContent = complete
+        ? 'You made room for a little movement. Take a breath, notice how you feel, and carry on with your day. No gold star required.'
+        : breakSteps[index].instruction;
+    }
+  };
+  const dispatch = (action: TimerAction) => {
+    state = timerReducer(state, action);
+    render();
+  };
+  toggle.addEventListener('click', () => {
+    if (state.elapsed >= totalSeconds) dispatch({ type: 'reset' });
+    dispatch({ type: state.running ? 'pause' : 'start', now: performance.now() });
+  });
+  next.addEventListener('click', () => dispatch({ type: 'next' }));
+  document
+    .querySelector('#timer-reset')
+    ?.addEventListener('click', () => dispatch({ type: 'reset' }));
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden && state.running) dispatch({ type: 'pause', now: performance.now() });
+  });
+  const interval = window.setInterval(() => {
+    if (state.running) dispatch({ type: 'tick', now: performance.now() });
+  }, 200);
+  window.addEventListener('pagehide', () => window.clearInterval(interval), { once: true });
+  // Restored back/forward-cache pages reload to restore the timer lifecycle.
+  window.addEventListener('pageshow', (event) => {
+    if (event.persisted) window.location.reload();
+  });
+  render();
+</script>

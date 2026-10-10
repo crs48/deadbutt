@@ -1,0 +1,19 @@
+---
+import Base from '../layouts/Base.astro';
+import { path } from '../lib/paths';
+---
+
+<Base title="A wrong turn, not a dead end">
+  <section class="wrap section">
+    <p class="eyebrow">404 / Nothing behind this link</p>
+    <h1>
+      A wrong turn.
+      <br />
+      <span class="serif-word">Happens to every butt.</span>
+    </h1>
+    <p style="margin-top:30px">That page isn’t here. Let’s get you back on your feet.</p>
+    <a class="button" href={path()}>
+      Back to the field guide →
+    </a>
+  </section>
+</Base>

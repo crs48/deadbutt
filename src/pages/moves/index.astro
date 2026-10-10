@@ -1,0 +1,121 @@
+---
+import Base from '../../layouts/Base.astro';
+import MoveArt from '../../components/MoveArt.astro';
+import Cite from '../../components/Cite.astro';
+import { moves } from '../../data/moves';
+import { path } from '../../lib/paths';
+const filters = ['All moves', 'Start here', 'Build strength', 'Feet & balance'];
+---
+
+<Base
+  title="The movement library"
+  description="Six approachable movement guides: chair squats, Romanian deadlifts, glute bridges, step-ups, foot awareness, and calf raises."
+>
+  <header class="wrap page-heading">
+    <p class="eyebrow">The movement library / Small moves, real possibilities</p>
+    <h1>
+      Let’s get your
+      <br />
+      <span class="serif-word">rear in gear.</span>
+    </h1>
+    <p>
+      You don’t need to earn your way into movement. Pick one comfortable place to begin, go slowly,
+      and leave room for tomorrow.
+    </p>
+  </header>
+  <section class="wrap moves-page" aria-label="Movement guides">
+    <div class="callout">
+      <p>
+        <strong>Before you begin:</strong> these are general exercise ideas, not a treatment plan.
+        Use stable support. Stop for sharp or worsening pain, dizziness, tingling, or numbness.
+        Persistent symptoms deserve <a href={path('learn/#get-help')}>individual guidance</a>. The
+        suggested amounts are adjustable starting examples.
+      </p>
+    </div>
+    <div class="filters" aria-label="Filter movement guides">
+      {filters.map((filter, i) => (
+        <button
+          class="filter"
+          type="button"
+          aria-pressed={i === 0 ? 'true' : 'false'}
+          data-filter={filter}
+        >
+          {filter}
+        </button>
+      ))}
+    </div>
+    <p class="sr-only" id="filter-status" role="status">
+      Showing all 6 moves.
+    </p>
+    <div class="move-grid">
+      {moves.map((move) => (
+        <a class="move-card" data-category={move.category} href={path(`moves/${move.slug}/`)}>
+          <div class:list={['move-picture', `card-${move.color}`]}>
+            <MoveArt type={move.type} />
+            <span class="move-time">{move.time}</span>
+          </div>
+          <div class="move-card-copy">
+            <p class="eyebrow">
+              {move.category} · {move.equipment}
+            </p>
+            <h3>
+              {move.name}
+              <span aria-hidden="true">↗</span>
+            </h3>
+            <p>{move.subtitle}</p>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+  <section class="wrap section intro-grid">
+    <div>
+      <p class="eyebrow">Make it a practice</p>
+      <h2>
+        Less “fix me.”
+        <br />
+        More <span class="serif-word">“build me.”</span>
+      </h2>
+    </div>
+    <div class="prose">
+      <h3>Start small. Repeat. Then add.</h3>
+      <p>
+        Choose one or two movements. Try one easy set with several repetitions left in reserve. If
+        you feel okay later and the next day, repeat on another day. As it gets easier, add
+        repetitions, a set, range, or a little load—one change at a time.
+      </p>
+      <p>
+        Strength sessions on two nonconsecutive days can be a practical starting rhythm. The wider
+        health goal is to train all major muscle groups, not only your glutes. Recovery, sleep, and
+        enjoyable activity belong in the plan too.
+      </p>
+      <Cite id="guidelines" />
+      <h3>Measure life, not just the burn.</h3>
+      <p>
+        Does standing up feel easier? Can you walk a little farther or manage stairs with more
+        confidence? Those changes matter more than a spectacular pump. Progress often takes weeks;
+        there is no guaranteed timeline.
+      </p>
+      <a class="button" href={path('reset/')}>
+        Try a three-minute movement break ↗
+      </a>
+    </div>
+  </section>
+</Base>
+<script>
+  const filters = document.querySelectorAll<HTMLButtonElement>('[data-filter]');
+  const cards = document.querySelectorAll<HTMLElement>('[data-category]');
+  filters.forEach((button) =>
+    button.addEventListener('click', () => {
+      const category = button.dataset.filter;
+      filters.forEach((item) => item.setAttribute('aria-pressed', String(item === button)));
+      cards.forEach(
+        (card) => (card.hidden = category !== 'All moves' && card.dataset.category !== category),
+      );
+      const count = [...cards].filter((card) => !card.hidden).length;
+      const status = document.querySelector('#filter-status');
+      if (status)
+        status.textContent = `Showing ${count} moves${category === 'All moves' ? '' : ` for ${category}`}.`;
+    }),
+  );
+</script>
